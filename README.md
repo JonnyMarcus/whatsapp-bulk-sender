@@ -2,8 +2,6 @@
 
 Projeto desenvolvido em **Python** que lê contatos cadastrados em um banco de dados no **Supabase** e envia mensagens personalizadas via **WhatsApp** utilizando a **Z-API**.
 
-## ![alt text](image-1.png)
-
 ## 🚀 Funcionalidades
 
 - Leitura de contatos direto do banco de dados (Supabase)
@@ -67,7 +65,6 @@ Crie uma tabela chamada `Contatos` com as colunas:
 - `id` (int, primary key)
 - `Nome` (text)
 - `Telefone` (text) — formato: `5511999999999`
-  ![alt text](image.png)
 
 ### 5. Conecte o WhatsApp na Z-API
 

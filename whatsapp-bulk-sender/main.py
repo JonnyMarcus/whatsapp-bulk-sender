@@ -9,5 +9,5 @@ if __name__ == "__main__":
         nome = contato["Nome"]
         telefone = contato["Telefone"]
         resultado = enviar_mensagem(telefone, nome)
-        print(f"Enviado para {nome}: {resultado}")t 
+        print(f"Enviado para {nome}: {resultado}")
 
