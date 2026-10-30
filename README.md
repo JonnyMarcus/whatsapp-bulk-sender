@@ -1,87 +1,52 @@
-# 📲 WhatsApp Bulk Sender
+# WhatsApp Bulk Sender
 
-Projeto desenvolvido em **Python** que lê contatos cadastrados em um banco de dados no **Supabase** e envia mensagens personalizadas via **WhatsApp** utilizando a **Z-API**.
+Script em Python para consultar contatos no Supabase e enviar mensagens por meio da Z-API.
 
-## 🚀 Funcionalidades
+> **Segurança:** credenciais que já apareceram em versões públicas devem ser revogadas e substituídas. O exemplo abaixo contém apenas placeholders. Use este projeto somente com contatos que autorizaram o recebimento de mensagens e respeite os termos dos provedores.
 
-- Leitura de contatos direto do banco de dados (Supabase)
-- Envio de mensagens personalizadas via WhatsApp (Z-API)
-- Suporte para até 3 contatos por execução
-- Credenciais protegidas com variáveis de ambiente (.env)
+## Estado atual
 
----
+O código consulta até três registros da tabela `Contatos` e envia uma mensagem por contato. Não há testes automatizados, tratamento de timeout/retries, validação do conteúdo dos registros nem confirmação de consentimento implementados. A execução real depende de credenciais e serviços externos; não foi validada nesta auditoria.
 
-## 🛠️ Tecnologias Utilizadas
+## Requisitos
 
 - Python 3
-- Supabase (banco de dados)
-- Z-API (envio de mensagens WhatsApp)
-- python-dotenv
-- requests
+- Uma instância Supabase com a tabela `Contatos`
+- Uma instância Z-API configurada
 
----
+## Execução
 
-## 📂 Estrutura do Projeto
-
-```text
-whatsapp-bulk-sender/
-├── main.py              → ponto de entrada
-├── supabase_client.py   → conexão e busca no banco
-├── zapi_client.py       → envio de mensagens via Z-API
-├── requirements.txt     → dependências do projeto
-├── .env                 → credenciais (não sobe pro GitHub)
-└── .gitignore
-```
-
----
-
-## ⚙️ Como Configurar
-
-### 1. Clone o repositório
+A partir da pasta `whatsapp-bulk-sender`:
 
 ```bash
-git clone https://github.com/seu-usuario/whatsapp-bulk-sender.git
-cd whatsapp-bulk-sender
-```
-
-### 2. Instale as dependências
-
-```bash
+python -m venv .venv
+# Ative o ambiente virtual
 pip install -r requirements.txt
 ```
 
-### 3. Configure o `.env`
+Copie `.env.example` para `.env` e preencha os valores localmente. Não envie `.env` ao Git.
 
-Crie um arquivo `.env` na raiz do projeto:
-SUPABASE_URL=https://lxgqndfbsvqewpeupsqi.supabase.co
-SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx4Z3FuZGZic3ZxZXdwZXVwc3FpIiwicm9sZSI6ImiLCJpYXQiOjE3ODE4Nzk0MjEsImV4cCI6MjA5NzQ1NTQyMX0.5BpQ_hxAGsBV44tfTGjupnjgDZqHE6bhKmXE0PC_jbg
-ZAPI_INSTANCE=3F4E331C58C691F68467CE717FF40C71
-ZAPI_TOKEN=C94EE2C2DC8FCC1CFAC81F2A
+```env
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_KEY=replace-with-a-rotated-supabase-key
+ZAPI_INSTANCE=replace-with-instance-id
+ZAPI_TOKEN=replace-with-z-api-token
+```
 
-### 4. Configure o Supabase
-
-Crie uma tabela chamada `Contatos` com as colunas:
-
-- `id` (int, primary key)
-- `Nome` (text)
-- `Telefone` (text) — formato: `5511999999999`
-
-### 5. Conecte o WhatsApp na Z-API
-
-Acesse [z-api.io](https://z-api.io), crie uma instância e conecte seu WhatsApp pelo QR Code.
-
----
-
-## ▶️ Como Executar
+Execute com:
 
 ```bash
 python main.py
 ```
 
----
+## Limitações e próximos passos
 
-## 👨‍💻 Autor
+- Rotacionar qualquer credencial já publicada e revisar o histórico público do repositório.
+- Validar variáveis obrigatórias antes de criar clientes.
+- Adicionar timeout, tratamento de respostas HTTP e logs sem dados pessoais.
+- Validar telefone e consentimento antes do envio; adicionar modo de simulação.
+- Criar testes unitários com chamadas HTTP e Supabase simuladas.
 
-**Jonny Marcus**
+## Licença
 
-Estudante de Ciência da Computação apaixonado por automação, desenvolvimento de software e soluções práticas.
+Nenhuma licença foi identificada neste repositório.
